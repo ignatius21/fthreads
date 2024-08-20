@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import { connectToDB } from "../mongoose";
 import Thread from "../models/thread.model";
 import User from "../models/user.model";
+import { model } from "mongoose";
+import path from "path";
 
 
 interface Params {
@@ -61,3 +63,35 @@ export async function fetchPosts(pageNumber = 1, pageSize = 10){
 
             return {posts, isNext};
 }
+
+export async function fetchThreadById(id: string){
+    connectToDB();
+    try {
+        const thread = await Thread.findById(id).populate({
+            path: 'author',
+            model: User,
+            select: 'id _id name image',
+        }).populate({
+            path: 'children',
+            populate: [
+                {
+                    path: 'author',
+                    model: User,
+                    select: 'id _id name parentId image'
+                },
+                {
+                    path: 'children',
+                    model: Thread,
+                    populate: {
+                        path: 'author',
+                        model: User,
+                        select: 'id _id name parentId image'
+                    }
+                }
+            ]
+        }).exec();
+        return thread;
+    } catch (error) {
+        console.log(error)
+    }
+};
