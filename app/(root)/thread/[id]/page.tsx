@@ -1,4 +1,5 @@
 import ThreadCard from "@/components/cards/ThreadCard";
+import Comment from "@/components/forms/Comment";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { formatDateString } from "@/lib/utils";
@@ -30,6 +31,30 @@ const page = async ({ params }: { params: { id: string } }) => {
           createdAt={formatDateString(thread.createdAt)}
           comments={thread.children}
         />
+      </div>
+      <div className="mt-7 ">
+        <Comment
+            threadId={thread._id}
+            currentUserImg={userInfo.image}
+            currentUserId={JSON.stringify(userInfo._id)}
+        
+        />
+      </div>
+      <div className="mt-10 ">
+        {thread.children.map((childrenItem:any) => (
+            <ThreadCard
+                key={childrenItem._id}
+                id={childrenItem._id}
+                currentUserId={user?.id || ""}
+                parentId={childrenItem.parentId}
+                content={childrenItem.text}
+                author={childrenItem.author}
+                community={childrenItem.community}
+                createdAt={formatDateString(childrenItem.createdAt)}
+                comments={childrenItem.children}
+                isComment={true}
+            />
+        ))}
       </div>
     </section>
   );
