@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
 import { FilterQuery, model, set, SortOrder } from "mongoose";
-import { on } from "events";
 import Thread from "../models/thread.model";
 
 interface Params {
