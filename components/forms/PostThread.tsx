@@ -26,7 +26,7 @@ const PostThread = ({ userId }: { userId: string }) => {
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
       thread: '',
-      accountId: userId.toString(),
+      accountId: userId,
     },
   });
 
@@ -34,7 +34,7 @@ const PostThread = ({ userId }: { userId: string }) => {
     await createThread(
       {
         text:values.thread,
-        author: userId.toString(),
+        author: userId,
         path: pathname,
         communityId: null,
     }
