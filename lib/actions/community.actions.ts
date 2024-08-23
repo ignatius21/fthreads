@@ -54,7 +54,7 @@ export async function fetchCommunityDetails(id: string) {
   try {
     connectToDB();
 
-    const communityDetails = await Community.findOne({ id }).populate([
+    const communityDetails = await Community.findOne({ id }).select('name username image').populate([
       "createdBy",
       {
         path: "members",
@@ -75,7 +75,7 @@ export async function fetchCommunityPosts(id: string) {
   try {
     connectToDB();
 
-    const communityPosts = await Community.findById(id).populate({
+    const communityPosts = await Community.findById(id).lean().populate({
       path: "threads",
       model: Thread,
       populate: [
