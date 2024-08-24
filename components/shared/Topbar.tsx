@@ -31,6 +31,7 @@ const Topbar = () => {
             </SignOutButton>
           </SignedIn>
         </div>
+        {/* TODO: agregar solo el nombre del usuario sin opciones */}
         <UserButton
           appearance={{
             baseTheme: dark,
