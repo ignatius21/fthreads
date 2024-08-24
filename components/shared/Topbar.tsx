@@ -1,4 +1,4 @@
-import { OrganizationSwitcher, SignedIn, SignOutButton } from '@clerk/nextjs'
+import { SignedIn, SignOutButton, UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -31,11 +31,13 @@ const Topbar = () => {
             </SignOutButton>
           </SignedIn>
         </div>
-        <OrganizationSwitcher
+        <UserButton
           appearance={{
             baseTheme: dark,
             elements:{
-              organizationSwitcherTrigger: 'py-2 px-4'
+              userButtonTrigger: 'py-2 px-2',
+              userButtonPopover: 'bg-dark-1 rounded-lg shadow-lg',
+              userButtonPopoverItem: 'py-2 px-4',
             }
           }}
         />
