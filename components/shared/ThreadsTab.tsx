@@ -25,7 +25,6 @@ const ThreadsTab = async ({ currentUserId, accountId, accountType }: Params) => 
                 parentId={thread.parentId}
                 content={thread.text}
                 author={accountType === 'User'? {name: result.name, image: result.image, id:result.image} : {name: thread.author.name,  image: thread.author.image, id: thread.author.id}}
-                community={thread.community}
                 createdAt={formatDateString(thread.createdAt)}
                 comments={thread.children}
                 isComment={true}
